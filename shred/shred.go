@@ -38,8 +38,6 @@ func overwriteFileWithRandomValue(file *os.File, fileSize int64){
 }
 
 func shred(filePath string) int {
-
-    log.Println(filePath)
     file, err := os.OpenFile( filePath, os.O_RDWR|os.O_TRUNC, 0755)
     defer file.Close()
     check(err)
@@ -61,6 +59,11 @@ func main() {
         log.Println("Wrong number of args.")
         log.Println(helpMessage)
         os.Exit(-1)
+    }
+
+    if os.Args[1] == "-h" || os.Args[1] == "--help"{
+        log.Println(helpMessage)
+        os.Exit(0)
     }
 
     filepath := os.Args[1]
